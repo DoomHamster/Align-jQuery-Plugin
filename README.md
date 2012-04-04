@@ -18,6 +18,7 @@ The Align plugin builds off of the [jQuery animate](http://api.jquery.com/animat
 ## Examples
 
 **Default Settings:**
+
 ```
 $('#MyElement').align();
 ```
@@ -31,6 +32,7 @@ $('#MyElement').align({
 </pre>
 
 **Align duration 2000ms:**
+
 ```
 $('#MyElement').align({duration:2000});
 ```
