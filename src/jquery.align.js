@@ -30,7 +30,7 @@
         return this.each(function() {
             var offsetParent = $(this).offsetParent();
             var container;
-            if (options.container) container = $(options.container);
+            if (options && options.container) container = $(options.container);
             else container = $(this).parent();
             
             var h = $(this).outerHeight();
