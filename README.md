@@ -7,6 +7,7 @@ The Align plugin builds off of the [jQuery animate](http://api.jquery.com/animat
 	.align( options )
 **options**: A map of additional options to pass to the method. Supported keys:
 
+* container: The DOM object with which to be aligned. default = parent element.
 * alignY: A bool indicating whether or not to align the Y axis. default = true
 * alignX: A bool indicating whether or not to align the X axis. default = true
 * duration: See [jQuery animate](http://api.jquery.com/animate/).
