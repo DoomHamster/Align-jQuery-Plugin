@@ -1,5 +1,5 @@
 /*
- * Align jQuery Plugin v1.0.0
+ * Align jQuery Plugin v1.0.1
  *
  * The Align plugin builds off of the jQuery .animate() function to align one or more elements on a specified element.
  *
@@ -14,9 +14,13 @@
     $.fn.align = function(options) {
         var alignY = true;
         var alignX = true;
+		var offsetTop = 0;
+		var offsetLeft = 0;
         var animateOptions = {};
-        
+
         if (options) {
+			if (options.offsetTop && typeof options.offsetTop == "number") offsetTop = options.offsetTop;
+			if (options.offsetLeft && typeof options.offsetLeft == "number") offsetLeft = options.offsetLeft;
             if (typeof(options.alignY) == "boolean") alignY = options.alignY;
             if (typeof(options.alignX) == "boolean") alignX = options.alignX;
             if (options.duration || options.duration === 0) animateOptions.duration = options.duration;
@@ -45,15 +49,15 @@
             if (container[0] == window || container[0] == document || offsetParent[0] == container[0]) {
                 ch = $(container).height();
                 cw = $(container).width();
-                top = (ch - h) / 2;
-                left = (cw - w) / 2;
+                top = ((ch - h) / 2) + offsetTop;
+                left = ((cw - w) / 2) + offsetLeft;
             }
             else {
-                var offset = $(container).offset();
+                var containerOffset = $(container).offset();
                 ch = $(container).innerHeight();
                 cw = $(container).innerWidth();
-                top = ((ch - h) / 2) + offset.top;
-                left = ((cw - w) / 2) + offset.left;
+                top = ((ch - h) / 2) + containerOffset.top + offsetTop;
+                left = ((cw - w) / 2) + containerOffset.left + offsetLeft;
             }
             
             var properties = {};
