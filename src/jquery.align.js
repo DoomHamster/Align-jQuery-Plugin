@@ -11,59 +11,89 @@
 
 (function($) {
 
-    $.fn.align = function(options) {
+    $.fn.align = function (options) {
         var alignY = true;
         var alignX = true;
-		var offsetTop = 0;
-		var offsetLeft = 0;
         var animateOptions = {};
+        var offsetTop = 0;
+        var offsetLeft = 0;
 
         if (options) {
-			if (options.offsetTop && typeof options.offsetTop == "number") offsetTop = options.offsetTop;
-			if (options.offsetLeft && typeof options.offsetLeft == "number") offsetLeft = options.offsetLeft;
-            if (typeof(options.alignY) == "boolean") alignY = options.alignY;
-            if (typeof(options.alignX) == "boolean") alignX = options.alignX;
-            if (options.duration || options.duration === 0) animateOptions.duration = options.duration;
-            if (options.easing) animateOptions.easing = options.easing;
-            if (options.complete) animateOptions.complete = options.complete;
-            if (options.step) animateOptions.step = options.step;
-            if (typeof(options.queue) == "boolean") animateOptions.queue = options.queue;
-            if (options.specialEasing) animateOptions.specialEasing = options.specialEasing;
+            if (options.offsetTop && typeof options.offsetTop === "number") {
+                offsetTop = options.offsetTop;
+            }
+            if (options.offsetLeft && typeof options.offsetLeft === "number") {
+                offsetLeft = options.offsetLeft;
+            }
+            if (typeof (options.alignY) === "boolean") {
+                alignY = options.alignY;
+            }
+            if (typeof (options.alignX) === "boolean") {
+                alignX = options.alignX;
+            }
+            if (options.duration || options.duration === 0) {
+                animateOptions.duration = options.duration;
+            }
+            if (options.easing) {
+                animateOptions.easing = options.easing;
+            }
+            if (options.complete) {
+                animateOptions.complete = options.complete;
+            }
+            if (options.step) {
+                animateOptions.step = options.step;
+            }
+            if (typeof (options.queue) === "boolean") {
+                animateOptions.queue = options.queue;
+            }
+            if (options.specialEasing) {
+                animateOptions.specialEasing = options.specialEasing;
+            }
         }
 
-        return this.each(function() {
+        return this.each(function () {
             var offsetParent = $(this).offsetParent();
             var container;
-            if (options && options.container) container = $(options.container);
-            else container = $(this).parent();
-            
+            if (options && options.container) {
+                container = $(options.container);
+            } else {
+                container = $(this).parent();
+            }
+
             var h = $(this).outerHeight();
             var w = $(this).outerWidth();
-            if (h < 1 || w < 1) return false; //exit if height or width is 0
-            
+            if (h < 1 || w < 1) {
+                return false;
+            } //exit if height or width is 0
+
             var ch; //container height
             var cw; //container width
             var top;
             var left;
-            
-            if (container[0] == window || container[0] == document || offsetParent[0] == container[0]) {
+
+            if (container[0] === window || container[0] === document || offsetParent[0] === container[0]) {
                 ch = $(container).height();
                 cw = $(container).width();
+
                 top = ((ch - h) / 2) + offsetTop;
                 left = ((cw - w) / 2) + offsetLeft;
-            }
-            else {
-                var containerOffset = $(container).offset();
+            } else {
+                var offset = $(container).offset();
                 ch = $(container).innerHeight();
                 cw = $(container).innerWidth();
-                top = ((ch - h) / 2) + containerOffset.top + offsetTop;
-                left = ((cw - w) / 2) + containerOffset.left + offsetLeft;
+
+                top = ((ch - h) / 2) + offset.top + offsetTop;
+                left = ((cw - w) / 2) + offset.left + offsetLeft;
             }
-            
+
             var properties = {};
-            if (alignY) properties.top = top;
-            if (alignX) properties.left = left;
-            
+            if (alignY) {
+                properties.top = top;
+            }
+            if (alignX) {
+                properties.left = left;
+            }
+
             $(this).css("position", "absolute");
             $(this).animate(properties, animateOptions);
         });
